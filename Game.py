@@ -43,14 +43,9 @@ def check_free_space(number):
 
 def check_win():
     
-    # Horizontal Check
-    for p in range(0,9,3):
-        if board[p] == board[p + 1] == board[p + 2] and board[p] != '-':
-            return True
-    
-    # Vertical Check    
-    for p in range(3):
-        if board[p] == board[p + 3] == board[p + 6] and board[p] != '-':
+    # Horizontal Check and Vertical Check
+    for count,p in enumerate(range(0,9,3)):
+        if (board[p] == board[p + 1] == board[p + 2] and board[p] != '-') or (board[count] == board[count + 3] == board[count + 6] and board[count] != '-'):
             return True
     
     # Horizontal Check
@@ -73,13 +68,15 @@ def input_number():
     return number
 
 def play_again():
-    restart = input('Play again? Y or N: ')
-    if restart in ('Y','y'):
-        return True
-    elif restart in ('N','n'):
-        return False
-    else:
-        play_again()
+    
+    while True:
+        restart = input('Play again? Y or N: ')
+        if restart in ('Y','y'):
+            return True
+        elif restart in ('N','n'):
+            return False
+        else:
+            print('invalid answer')
             
 def display_turn(player):
     print('Player ' + player)
